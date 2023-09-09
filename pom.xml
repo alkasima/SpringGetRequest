@@ -14,7 +14,7 @@
 	<name>spring-get-request</name>
 	<description>The project that  take two GET request query parameters and return specific information in JSON format</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
