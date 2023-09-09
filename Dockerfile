@@ -1,16 +1,8 @@
-# Fetching latest version of Java
-FROM openjdk:20
+FROM maven:3.8.5-opendjdk-17 AS build
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Setting up work directory
-WORKDIR /app
-COPY . /app/
-RUN mvn clean package
-
-# Copy the jar file into our app
-COPY --from=build /app/target/*.jar /app/app.jar
-
-# Exposing port 8080
+FROM openjdk:17.0.1-jdk-slim
+COPY --from=build /target/demo-0.0.1-SNAPSHOT.jar demo.jar
 EXPOSE 8080
-
-# Starting the application
-CMD ["java", "-jar", "spring-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","demo.jar"]
