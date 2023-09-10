@@ -53,12 +53,12 @@ public class RequestController {
          object.put("status_code", 200); // Use an integer for the status_code
 
          // Convert the LinkedHashMap to a JSON string
-         String jsonString = "{" + object.entrySet().stream()
-                 .map(entry -> "\"" + entry.getKey() + "\": " + entry.getValue())
-                 .reduce((entry1, entry2) -> entry1 + ", " + entry2)
-                 .orElse("") + "}";
+       //  String jsonString = "{" + object.entrySet().stream()
+         //        .map(entry -> "\"" + entry.getKey() + "\": " + entry.getValue())
+        //      .reduce((entry1, entry2) -> entry1 + ", " + entry2)
+          //       .orElse("") + "}";
 
-          return jsonString;
+          return object;
 
     }
 }
