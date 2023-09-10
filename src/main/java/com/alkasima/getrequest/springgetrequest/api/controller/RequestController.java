@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.HashMap;
@@ -28,9 +26,14 @@ public class RequestController {
     public Object getObject(@RequestParam("slack_name") String slackName, @RequestParam("track") String track) {
 
          // Get the current time in UTC+2
-         LocalDateTime utcTime = LocalDateTime.now().plusHours(2);
-         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
-         String formattedUtcTime = utcTime.format(formatter);
+        Instant utcInstant = Instant.now();
+        ZonedDateTime utcTime = ZonedDateTime.ofInstant(utcInstant, ZoneId.of("UTC"));
+
+        // Add 2 hours
+        utcTime = utcTime.plusHours(2);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        String formattedUtcTime = utcTime.format(formatter);
 
          //Variable for github file and repo
          String git_repo_url = "https://github.com/alkasima/SpringGetRequest";
