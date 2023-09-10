@@ -1,12 +1,11 @@
 package com.alkasima.getrequest.springgetrequest.api.controller;
 
 
+import jakarta.servlet.http.HttpServletRequestWrapper;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.DayOfWeek;
@@ -23,9 +22,10 @@ import java.util.Map;
 public class RequestController {
 
 
-    @GetMapping("/api/slack")
+    @GetMapping("/api")
     @ResponseBody
-   public Object getObject(@RequestParam("slack_name") String slackName, @RequestParam("track") String track) {
+    @RequestMapping( value = "api", method = RequestMethod.GET)
+    public Object getObject(@RequestParam("slack_name") String slackName, @RequestParam("track") String track) {
 
          // Get the current time in UTC+2
          LocalDateTime utcTime = LocalDateTime.now().plusHours(2);
