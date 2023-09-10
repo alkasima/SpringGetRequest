@@ -25,12 +25,9 @@ public class RequestController {
     @RequestMapping( value = "api", method = RequestMethod.GET)
     public Object getObject(@RequestParam("slack_name") String slackName, @RequestParam("track") String track) {
 
-         // Get the current time in UTC+2
+         // Get the current time in utc
         Instant utcInstant = Instant.now();
         ZonedDateTime utcTime = ZonedDateTime.ofInstant(utcInstant, ZoneId.of("UTC"));
-
-        // Add 2 hours
-        utcTime = utcTime.plusHours(2);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
         String formattedUtcTime = utcTime.format(formatter);
